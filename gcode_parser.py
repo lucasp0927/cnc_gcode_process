@@ -1,5 +1,6 @@
+import numpy as np
 from gcode_command import G0,G1,G90,G17,G20,G21,G94,G28,G91,T1,S,M3,G54,F,M5,M30
-
+#TODO: issue parsing command that are substring of other command. M3, M30
 class STATE:
     def __init__(self, x, y, z, feed, spindle_speed, spindle_on, last_gcode):
         self.x = x
@@ -69,8 +70,17 @@ class GCODE_LINE:
                  raise ValueError('Unkown command.', code)
          self.end_state = state
 
-     def printcode(self,):
-         print(self.gcode)
+     def code_str(self,):
+         output = ""
+         for g in self.gcode:
+             output += g.code_str()+" "
+         if self.comment != "":
+             output += "("+self.comment+")"
+         return output.strip()
+
+     def rotate(self, rot_matrix):
+         for g in self.gcode:
+             g.rotate(rot_matrix)
 
 class GCODEPARSER:
     def __init__(self, filename):
@@ -101,4 +111,11 @@ class GCODEPARSER:
         return gcodes
 
     def output_gcode_file(self, filename):
-        pass
+        f = open(filename,'w')
+        for gc in self.gcodes:
+            f.write(gc.code_str()+"\n")
+        f.close()
+
+    def rotate(self, rot_matrix):
+        for gc in self.gcodes:
+            gc.rotate(rot_matrix)

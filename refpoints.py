@@ -47,11 +47,16 @@ class REFPOINTS:
         else:
             rot_matrix1 = self.axis_rot(rot1_axis, -1*theta)
         b_ref_rot = rot_matrix1.dot(self.b_ref)
+        print(np.linalg.norm(b_ref_rot-self.b_real))
         assert(np.linalg.norm(b_ref_rot-self.b_real) < 0.03*self.ab_real)
 
         rot2_axis = self.b_real/(self.ab_real)
         c_ref_rot = rot_matrix1.dot(self.c_ref)
-        theta = np.arccos(np.dot(c_ref_rot,self.c_real)/(self.ac_ref*self.ac_real))
+
+        v1 = c_ref_rot - np.dot(c_ref_rot,rot2_axis)*rot2_axis
+        v2 = self.c_real - np.dot(self.c_real,rot2_axis)*rot2_axis
+        theta = np.arccos(np.dot(v1,v2)/(np.linalg.norm(v1)*np.linalg.norm(v2)))
+
         rot_matrix2_p = self.axis_rot(rot2_axis, theta)
         rot_matrix2_n = self.axis_rot(rot2_axis, -1*theta)
         c_ref_rot2_p = rot_matrix2_p.dot(c_ref_rot)
@@ -62,6 +67,7 @@ class REFPOINTS:
             rot_matrix2 = self.axis_rot(rot2_axis, -1*theta)
         c_ref_rot2 = rot_matrix2.dot(c_ref_rot)
         assert(np.linalg.norm(c_ref_rot2-self.c_real) < 0.03*self.ac_real)
+
         # rot_matrix2 =  self.axis_rot(rot2_axis, theta)
         # c_ref_rot2 = rot_matrix2.dot(c_ref_rot)
         # if (np.linalg.norm(c_ref_rot2-self.c_real) > 0.03*self.ac_real):
