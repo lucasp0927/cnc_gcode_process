@@ -59,9 +59,18 @@ class G0:
         else:
             g = None
         return (code,g,state)
+
     def code_str(self,):
         output = "G0 X{:.3f} Y{:.3f} Z{:.3f}".format(self.x, self.y, self.z)
         return output
+
+    def flipx(self,):
+        self.x = -1*self.x
+
+    def limitz(self,z_limit):
+        if self.z > z_limit:
+            print("G0 limit z ",self.z," to ",z_limit)
+            self.z = z_limit
 
     def rotate(self, rot_matrix):
         vec = np.array([self.x,self.y,self.z])
@@ -108,9 +117,18 @@ class G1:
         else:
             g = None
         return (code,g,state)
+
     def code_str(self,):
         output = "G1 X{:.3f} Y{:.3f} Z{:.3f}".format(self.x, self.y, self.z)
         return output
+
+    def flipx(self,):
+        self.x = -1*self.x
+
+    def limitz(self,z_limit):
+        if self.z > z_limit:
+            print("G1 limit z ",self.z," to ",z_limit)
+            self.z = z_limit
 
     def rotate(self, rot_matrix):
         vec = np.array([self.x,self.y,self.z])
@@ -138,6 +156,10 @@ class S:
         return(code,g,state)
     def code_str(self,):
         return "S{:d}".format(self.speed)
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class F:
@@ -158,6 +180,10 @@ class F:
         return(code,g,state)
     def code_str(self,):
         return "F{:d}".format(self.feed)
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class M30:
@@ -176,6 +202,10 @@ class M30:
 
     def code_str(self,):
         return "M30"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class M3:
@@ -195,6 +225,10 @@ class M3:
 
     def code_str(self,):
         return "M3"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class M5:
@@ -214,6 +248,10 @@ class M5:
 
     def code_str(self,):
         return "M5"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G90:
@@ -232,6 +270,10 @@ class G90:
 
     def code_str(self,):
         return "G90"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G54:
@@ -250,6 +292,10 @@ class G54:
 
     def code_str(self,):
         return "G54"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G17:
@@ -268,6 +314,10 @@ class G17:
 
     def code_str(self,):
         return "G17"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G20:
@@ -286,6 +336,10 @@ class G20:
 
     def code_str(self,):
         return "G20"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G21:
@@ -304,6 +358,10 @@ class G21:
 
     def code_str(self,):
         return "G21"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G17:
@@ -322,6 +380,10 @@ class G17:
 
     def code_str(self,):
         return "G17"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G94:
@@ -340,6 +402,10 @@ class G94:
 
     def code_str(self,):
         return "G94"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 #ignore command
@@ -359,6 +425,10 @@ class T1:
 
     def code_str(self,):
         return "T1"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 class G28:
@@ -377,6 +447,10 @@ class G28:
 
     def code_str(self,):
         return "G28"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass
 # class G53:
@@ -410,5 +484,9 @@ class G91:
         return(code,g,state)
     def code_str(self,):
         return "G91"
+    def flipx(self,):
+        pass
+    def limitz(self,z_limit):
+        pass
     def rotate(self, rot_matrix):
         pass

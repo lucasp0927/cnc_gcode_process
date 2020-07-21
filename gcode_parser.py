@@ -78,6 +78,14 @@ class GCODE_LINE:
              output += "("+self.comment+")"
          return output.strip()
 
+     def flipx(self,):
+         for g in self.gcode:
+             g.flipx()
+
+     def limitz(self,z_limit):
+         for g in self.gcode:
+             g.limitz(z_limit)
+
      def rotate(self, rot_matrix):
          for g in self.gcode:
              g.rotate(rot_matrix)
@@ -103,11 +111,6 @@ class GCODEPARSER:
             gl = GCODE_LINE(line,state)
             state = gl.end_state
             gcodes.append(gl)
-
-        print(self.line_num)
-        print(len(gcodes))
-        # for line in lines:
-        #     print(line)
         return gcodes
 
     def output_gcode_file(self, filename):
@@ -115,6 +118,14 @@ class GCODEPARSER:
         for gc in self.gcodes:
             f.write(gc.code_str()+"\n")
         f.close()
+
+    def flipx(self,):
+        for gc in self.gcodes:
+            gc.flipx()
+
+    def limitz(self,z_limit):
+        for gc in self.gcodes:
+            gc.limitz(z_limit)
 
     def rotate(self, rot_matrix):
         for gc in self.gcodes:
