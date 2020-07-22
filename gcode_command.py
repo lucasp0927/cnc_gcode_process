@@ -162,6 +162,8 @@ class S:
         pass
     def rotate(self, rot_matrix):
         pass
+    def setspeed(self, speed):
+        self.speed = speed
 class F:
     #feedrate
     def __init__(self,feed):

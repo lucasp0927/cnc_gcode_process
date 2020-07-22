@@ -90,6 +90,11 @@ class GCODE_LINE:
          for g in self.gcode:
              g.rotate(rot_matrix)
 
+     def setspeed(self, speed):
+         for g in self.gcode:
+             if isinstance(g,S):
+                 g.setspeed(speed)
+
 class GCODEPARSER:
     def __init__(self, filename):
         try:
@@ -130,3 +135,7 @@ class GCODEPARSER:
     def rotate(self, rot_matrix):
         for gc in self.gcodes:
             gc.rotate(rot_matrix)
+
+    def setspeed(self, speed):
+        for gc in self.gcodes:
+            gc.setspeed(speed)

@@ -16,6 +16,7 @@ if __name__ == "__main__":
     parser.add_argument("-r","--rotate",default=False,action='store_true')
     parser.add_argument("-x","--flipx",default=False,action='store_true')
     parser.add_argument("-z","--limitz",type=float,nargs=1)
+    parser.add_argument("-s","--speed",type=int,nargs=1)
 
     # parse the arguments from standard input
     args = parser.parse_args()
@@ -55,3 +56,9 @@ if __name__ == "__main__":
         gcodes = GCODEPARSER(gcode_filename)
         gcodes.limitz(z_limit)
         gcodes.output_gcode_file(gcode_filename.replace(".nc","_limitz.nc"))
+
+    if args.speed != None:
+        speed = args.speed[0]
+        gcodes = GCODEPARSER(gcode_filename)
+        gcodes.setspeed(speed)
+        gcodes.output_gcode_file(gcode_filename.replace(".nc","_speed.nc"))
